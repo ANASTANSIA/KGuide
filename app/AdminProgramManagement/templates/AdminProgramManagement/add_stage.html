@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+
+
+
+</head>
+<body>
+    <form name="add_stage" action="" method="POST">
+        <div class="form-group row">
+          {{ form.stage_name.label }} 
+          {{ form.stage_name(size=64) }}
+        </div>
+        <div class="form-group row">
+            
+          </div>
+
+          <div class="form-group row">
+            {{ form.stage_name.label }} 
+            {{ form.stage_name(size=64) }}
+        <!--error message -->
+        {% for error in form.stage_name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+          </div>
+       
+       
+        <div class="form-group row">
+          {{ form.event_description.label }} 
+          {{ form.event_description(size=250) }}
+          <!--error message -->
+          {% for error in form.event_description.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+          
+
+        </div>
+        <button type="button"  class="btn btn-primary" name="add_event" onclick="add_stage()">Add Another Event</button>
+        
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                
+                <th scope="col">Events</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                
+                <td>Event oneT</td>
+                <td>Event two</td>
+              </tr>
+             
+            </tbody>
+          </table>
+
+          <button type="submit"  class="btn btn-primary btn-lg " onclick="submit_entry();"> Submit</button>  
+          
+      </form>
+      
+
+
+</body>
+<script>
+  function add_event(){
+    var event_table= document.createElement("event_table");
+    
+  }
+  var stage_name = document.getElementById("stage_name");
+  var stage_description = document.getElementById("stage_description");
+  var start = document.getElementById("start");
+  var end = document.getElementById("end");
+  var event_description = document.getElementById("events");
+  var add_event = document.getElementById("add_event");
+  
+  var entry = {
+    stage_name = stage_name.value,
+    stage_description = stage_description.value,
+    start = start.value,
+    end = end.value,
+    event_description = event_description.value,
+
+
+  };
+  fetch('${window.origin}/add_stage<program>',{
+    method:"POST",
+    credentials: "include",
+    body: JSON.stringify(entry),
+    cache: "no_cache",
+    headers: new Headers({
+      "content-type": "application/json"
+    })
+ 
+  });
+  
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<table>
+    <tr valign="top">
+        <td><img src="{{ post.author.avatar(36)" }} alt=""></td>
+        <td>
+            <a href="{{ url_for('user',username=post.author.username) }}">
+            {{ program.program_name }}
+        </a>
+             
+              <br> {says:{ product.body }}</td>
+    </tr>
+    <p>
+        {{ form.stage_name.label }} <br>
+        {{ form.stage_name(size=64) }}
+        <!--error message
+        {% for error in form.stage_name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.stage_name.label }} <br>
+        {{ form.stage_name(size=64) }}
+        <!--error message
+        {% for error in form.stage_name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.event_description.label }} <br>
+        {{ form.event_description(size=250) }}
+        <!--error message
+        {% for error in form.event_description.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit()}} </p>
+</table>
+
+<script>
+let stage_select = document.getElementById('state');
+let program_select = document.getElementById('program')
+
+program_select.onchange = function(){
+    program = program_select.value; 
+
+    fetch('/stage/' +program).then(function(response){
+        response.json().then(function(data){
+            let optionHTML ="";
+
+            for (let stage of data.stages){
+                optionHTML += '<option value="' + stage.stage_id+'">' + stage.stagename +'</option>';
+
+            }
+            stage_select.innerHTML = optionHTML;
+
+        })
+    
+});
+</script>
+-->

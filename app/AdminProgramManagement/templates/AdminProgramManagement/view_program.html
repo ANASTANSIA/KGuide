@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p> <h1> Program Name:</h1></p>  
+    <p><h3> Program Description</h3></p>
+    <a class="btn btn-primary" href="{{ url_for('AdminProgramManagement.add_stage') }}" role="button">Add Stage</a>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Stage Name</th>
+            <th scope="col">Stage Duration</th>
+            <th scope="col">Events</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Stag1</td>
+            <td>1 - 20</td>
+            <td> <tr>
+                <td>
+                  First row of Inner Table
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Second row of Inner Table
+                </td></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Stage 2</td>
+            <td>20 - 30</td>
+            <td>  <tr>
+                <td>
+                  First row of Inner Table
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Second row of Inner Table
+                </td></td>
+          </tr>
+         
+        </tbody>
+      </table>
+
+</body>
+</html>

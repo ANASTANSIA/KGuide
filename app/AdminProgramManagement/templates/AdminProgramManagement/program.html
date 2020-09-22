@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"> Program Name</th>
+            <th scope="col">Program Description</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td<a href="{{ url_for('AdminProgramManagement.view_program')}} "></a>>Feeding</td<a href="{{ url_for('AdminProgramManagement.view_program')}} "></a>>
+            <td>This program provides all the necessary activities that should happen to the chicken with regards to feeding</td>
+            
+          </tr>
+         
+        </tbody>
+      </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p action="" method="post" novalidate>
+    {{ form.hidden_tag()}}
+    <p>
+        {{ form.program_name.label }} <br>
+        {{ form.program_name(size=32) }}
+        <!--error message-->
+        {% for error in form.program_name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.program_description.label }} <br>
+        {{ form.program_description(size=32) }}
+        {% for error in form.program_description.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+    
+    <p>{{ form.submit()}} </p>
+</form>
+
+{% endblock %}
+
+
+<div class="card-body collapse show" id="card1">
+    <h2 class="card-title"></h2>
+    <p class="card-text"></p>
+        <h2>{{program.programName}</h2>
+        <h4>${program.programDescription}</h4>
+        
+        
+        <button class="btn btn danger" >Delete</button>
+
+
+    <div class="card mb-grid">
+        <div class="table-responsive-md">
+            <table
+                class="table table-actions table-striped table-hover mb-0"
+                data-table>
+                <thead>
+                    <tr>
+                        <th scope="col"><label
+                            class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox"
+                                class="custom-control-input table-select-all">
+                                <span class="custom-control-indicator"></span>
+                        </label></th>
+                        <th scope="col">STAGE</th>
+                        <th scope="col">EVENT</th>
+                        <th scope="col">ACTION</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                
+                    <tr>
+                        <c:forEach var="stage" items="${show}">
+                
+                        <tr>
+                        
+                            <td>
+                            <p>${stage.startTime} - ${stage.endTime}</p>
+                            
+                            </td>
+                            
+                            
+
+                        
+                        </c:forEach>
+                        <td rowspan="rowspan">
+                        <c:forEach var="event" items="${eventList}">
+                            
+                            <p>${event.eventDescription}</p>
+                            
+                            
+                            
+                            </c:forEach>
+                                </td>
+                    
+                    <td><a href="EditStage.jsp"
+                            class="btn btn-sm btn-danger">EDIT</a>
+                            <a href="DeleteStage"
+                            class="btn btn-sm btn-danger">DELETE</a>
+                            
+                            </td>
+                            
+                    </tr>
+                            
+                    
+                
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card">
+<div class="card-body">
+    <h5 class="card-title">
+        <a href="DisplayProgramServlet" class="btn btn-secondary">Available
+            programs</a>
+    </h5>
+    
+    <div class="card-body">
+    
+    <c:forEach var="program" items="${programList}">
+                    <p><a href="DisplayEvents?programId=${program.programId}">${program.programDescription}</a></p>
+
+                    </c:forEach>
+    
+    </div>
+
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+</div>
