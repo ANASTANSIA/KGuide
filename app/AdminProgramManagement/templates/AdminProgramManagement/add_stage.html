@@ -1,174 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="../../../static/css/animate.css">
+
+  <link rel="stylesheet" href="../../../static/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="../../../static/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="../../../static/css/magnific-popup.css">
+
+
+  <link rel="stylesheet" href="../../../static/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href=".../../../static/css/jquery.timepicker.css">
+
+  <link rel="stylesheet" href="../../../static/css/flaticon.css">
+  <link rel="stylesheet" href="../../../static/css/style.css">
+
+
 
 
 
 
 </head>
+
 <body>
-    <form name="add_stage" action="" method="POST">
-        <div class="form-group row">
-          {{ form.stage_name.label }} 
-          {{ form.stage_name(size=64) }}
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="{{ url_for('user_management.index') }}"><span
+          class="flaticon-pawprint-1 mr-2"></span>Chicken Rearing </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span> Menu
+      </button>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="{{ url_for('AdminProgramManagement.index') }}"
+              class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item"><a href="{{ url_for('AdminProgramManagement.fetch_programs')}}" class="nav-link">Manage
+              Chicken</a>
+          </li>
+          <li class="nav-item"><a href="{{ url_for('products.view_product')}}" class="nav-link">Products</a></li>
+
+          {% if current_user.is_anonymous %}
+          <li class="nav-item"> <a href="{{ url_for('authentication.login')}}" class="nav-link">Login</a></li>
+          {% else %}
+          <li class="nav-item"> <a href="{{ url_for('user.user', username=current_username) }}"
+              class="nav-link">Profile</a></li>
+          <li class="nav-item"> <a href="{{ url_for('authentication.logout')}}" class="nav-link">LogOut</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br>
+  <br>
+
+  <div class="row mx-auto  ">
+    <div class="col-sm-8 mx-auto ">
+      <div class="card  mx-auto">
+        <div class="card-body">
+          <form action="{{ url_for('AdminProgramManagement.add_stage',program_id = program_id ) }} " method="POST">
+
+            <div class="form-group">
+              <label for="stage_name">Stage Name</label>
+              <input type="text" class="form-control" id="stage_name" name="stage_name">
+
+            </div>
+            <div class="form-group">
+              <label for="start">Start</label>
+              <input type="number" class="form-control" id="start" name="start">
+            </div>
+
+            <div class="form-group">
+              <label for="end">End</label>
+              <input type="number" class="form-control" id="end" name="end">
+            </div>
+
+            <div class="form-inline">
+              <div class="form-group mb-2">
+                <label for="event">Event</label>
+                <input type="text" class="form-control" id="event" name="event">
+              </div>
+              <button type="button" class="btn btn-primary" name="add_event" id="addBtn">Add Another Event</button>
+            </div>
+
+            <div class="form-group">
+              <table class="table" id="event_list" name="event_list">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Events</th>
+
+                  </tr>
+                </thead>
+                <tbody id="tbody">
+
+
+
+                </tbody>
+              </table>
+            </div>
+
+
+            <button type="submit" id="submit" class="btn btn-primary btn-lg "> Submit</button>
+
+          </form>
+
         </div>
-        <div class="form-group row">
-            
-          </div>
 
-          <div class="form-group row">
-            {{ form.stage_name.label }} 
-            {{ form.stage_name(size=64) }}
-        <!--error message -->
-        {% for error in form.stage_name.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-          </div>
-       
-       
-        <div class="form-group row">
-          {{ form.event_description.label }} 
-          {{ form.event_description(size=250) }}
-          <!--error message -->
-          {% for error in form.event_description.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-          {% endfor %}
-          
+      </div>
+    </div>
 
-        </div>
-        <button type="button"  class="btn btn-primary" name="add_event" onclick="add_stage()">Add Another Event</button>
-        
-        <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                
-                <th scope="col">Events</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                
-                <td>Event oneT</td>
-                <td>Event two</td>
-              </tr>
-             
-            </tbody>
-          </table>
+  </div>
 
-          <button type="submit"  class="btn btn-primary btn-lg " onclick="submit_entry();"> Submit</button>  
-          
-      </form>
-      
 
 
 </body>
 <script>
-  function add_event(){
-    var event_table= document.createElement("event_table");
-    
-  }
-  var stage_name = document.getElementById("stage_name");
-  var stage_description = document.getElementById("stage_description");
-  var start = document.getElementById("start");
-  var end = document.getElementById("end");
-  var event_description = document.getElementById("events");
-  var add_event = document.getElementById("add_event");
-  
-  var entry = {
-    stage_name = stage_name.value,
-    stage_description = stage_description.value,
-    start = start.value,
-    end = end.value,
-    event_description = event_description.value,
+  $(document).ready(function () {
 
+    // Denotes total number of rows 
+    var rowIdx = 0;
 
-  };
-  fetch('${window.origin}/add_stage<program>',{
-    method:"POST",
-    credentials: "include",
-    body: JSON.stringify(entry),
-    cache: "no_cache",
-    headers: new Headers({
-      "content-type": "application/json"
-    })
- 
+    // jQuery button click event to add a row 
+    $('#addBtn').on('click', function () {
+      var event = document.getElementById('event').value;
+      // Adding a row inside the tbody. 
+      $('#tbody').append(`<tr id="R${++rowIdx}"> 
+         <td class="row-index text-center"> 
+         <p> ${rowIdx}</p> 
+         </td> 
+         <td class=" text-center"> 
+         <p> ${event} </p> 
+         </td>
+          <td class="text-center"> 
+            <button class="btn btn-danger remove"
+              type="button">Remove</button> 
+            </td> 
+          </tr>`);
+    });
+
+    // jQuery button click event to remove a row. 
+    $('#tbody').on('click', '.remove', function () {
+
+      // Getting all the rows next to the row 
+      // containing the clicked button 
+      var child = $(this).closest('tr').nextAll();
+
+      // Iterating across all the rows  
+      // obtained to change the index 
+      child.each(function () {
+
+        // Getting <tr> id. 
+        var id = $(this).attr('id');
+
+        // Getting the <p> inside the .row-index class. 
+        var idx = $(this).children('.row-index').children('p');
+
+        // Gets the row number from <tr> id. 
+        var dig = parseInt(id.substring(1));
+
+        // Modifying row index. 
+        idx.html(`Row ${dig - 1}`);
+
+        // Modifying row id. 
+        $(this).attr('id', `R${dig - 1}`);
+      });
+
+      // Removing the current row. 
+      $(this).closest('tr').remove();
+
+      // Decreasing total number of rows by 1. 
+      rowIdx--;
+    });
   });
-  
+
+
+
+  $(document).ready(function () {
+
+    $(function () {
+      $('#submit').click(function () {
+
+        var TableData = [];
+        $('#event_list tr').each(function (row, tr) {
+          TableData[row] = $(tr).find('td:eq(1)').text()
+
+        });
+        TableData.shift();
+
+        var stage_name = $('#stage_name').val();
+        var start = $('#start').val();
+        var end = $('#end').val();
+
+
+        alert(TableData);
+
+        var myTableData = {
+          stage_name: stage_name,
+          start: start,
+          end: end,
+          TableData: [{
+            TablEData:TableData}
+        ]
+        }
+        alert (myTableData)
+        // data: $(form,TableData).serializeArray()
+
+        $.ajax({
+          url: '/add_Stage/<program_id>',
+          contentType: 'application/json; charset=utf-8',
+          dataType:JSON,
+          data: JSON.stringify(myTableData),
+          type: 'POST',
+          success: function (response) {
+            console.log(response);
+          },
+          error: function (error) {
+            console.log(error);
+          }
+        });
+      });
+    });
+
+  })
+
+
+
+
+// function submit(){
+//   var stage_name = document.getElementById("stage_name");
+//   var start = document.getElementById("start");
+//   var end = document.getElementById("end");
+
+//   var myTableArray =[];
+//   $("table #event_list tr").each(function() {
+//       var arrayOfThisRow = [];
+//       var tableData = $(this).find('td');
+//       if (tableData.length > 0) {
+//           tableData.each(function() { arrayOfThisRow.push($(this).text()); });
+//           myTableArray.push(arrayOfThisRow);
+//       }
+//   });
+
+// alert(myTableArray);
+
+
+//   var entry = {
+//     stage_name: stage_name.value,
+//     start: start.value,
+//     end: end.value,
+//     event_list: myTableArray
+// };
+// console.log(entry);
+
+// fetch(`${window.origin}/addd_stage`, {
+//       method: "POST",
+//       credentials: "include",
+//       body: JSON.stringify(entry),
+//       cache: "no-cache",
+//       headers: new Headers({
+//         "content-type": "application/json"
+//       })
+//     })
+//     .then(function (response) {
+//         if (response.status !== 200) {
+//           console.log(`Looks like there was a problem. Status code: ${response.status}`);
+//           return;
+//         }
+//         response.json().then(function (data) {
+//           console.log(data);
+//         });
+//       })
+//       .catch(function (error) {
+//         console.log("Fetch error: " + error);
+//       });
+// }
+
+
 
 </script>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-<!--
-
-<table>
-    <tr valign="top">
-        <td><img src="{{ post.author.avatar(36)" }} alt=""></td>
-        <td>
-            <a href="{{ url_for('user',username=post.author.username) }}">
-            {{ program.program_name }}
-        </a>
-             
-              <br> {says:{ product.body }}</td>
-    </tr>
-    <p>
-        {{ form.stage_name.label }} <br>
-        {{ form.stage_name(size=64) }}
-        <!--error message
-        {% for error in form.stage_name.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.stage_name.label }} <br>
-        {{ form.stage_name(size=64) }}
-        <!--error message
-        {% for error in form.stage_name.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.event_description.label }} <br>
-        {{ form.event_description(size=250) }}
-        <!--error message
-        {% for error in form.event_description.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>{{ form.submit()}} </p>
-</table>
-
-<script>
-let stage_select = document.getElementById('state');
-let program_select = document.getElementById('program')
-
-program_select.onchange = function(){
-    program = program_select.value; 
-
-    fetch('/stage/' +program).then(function(response){
-        response.json().then(function(data){
-            let optionHTML ="";
-
-            for (let stage of data.stages){
-                optionHTML += '<option value="' + stage.stage_id+'">' + stage.stagename +'</option>';
-
-            }
-            stage_select.innerHTML = optionHTML;
-
-        })
-    
-});
-</script>
--->

@@ -55,20 +55,20 @@
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item active"><a href="{{ url_for('user_management.index') }}" class="nav-link">Home</a></li>
 	        	<li class="nav-item"><a href="{{ url_for('user_management.get_program')}}" class="nav-link">Managing Chicken</a></li>
-	        	<li class="nav-item"><a href="{{ url_for('user_management.vaccines')}}" class="nav-link">Housing</a></li>
-			   <li class="nav-item"> <a href="{{ url_for('user.delete_product')}}"class="nav-link">Market Your Product</a></li>
+	        	
+			   <li class="nav-item"> <a href="{{ url_for('products.add_product')}}"class="nav-link">Market Your Product</a></li>
 				{% if current_user.is_anonymous %}
 				<li class="nav-item"> <a href="{{ url_for('authentication.login')}}"class="nav-link">Login</a></li>
 				{% else %}
 				<li class="nav-item"> <a href="{{ url_for('user.user', username=current_username) }}"class="nav-link">Profile</a></li>
-				<li class="nav-item"> <a href="{{ url_for('auth.logout')}}"class="nav-link">LogOut</a></li>
+				<li class="nav-item"> <a href="{{ url_for('authentication.logout')}}"class="nav-link">LogOut</a></li>
 				{% endif %}
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
-    <div class="hero-wrap js-fullheight" style="background-image: url('../../../static/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap js-fullheight" style="background-image: url('../../../static/images/5.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -89,8 +89,8 @@
             		<span class="flaticon-blind"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">Dog Walking</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
+                <h3 class="heading">Breeds of Chicken</h3>
+                <p>Chicken exist in different types </p>
                 <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
               </div>
             </div>      
@@ -101,8 +101,8 @@
             		<span class="flaticon-dog-eating"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">Pet Daycare</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
+                <h3 class="heading">Housing</h3>
+                <p> Proper housing should be considered when diving into chicken farming</p>
                 <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
               </div>
             </div>    
@@ -113,8 +113,8 @@
             		<span class="flaticon-grooming"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">Pet Grooming</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
+                <h3 class="heading">Parasites</h3>
+                <p>Parasites can result in stanted growth and reduced outputs</p>
                 <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
               </div>
             </div>      
@@ -127,33 +127,34 @@
     	<div class="container">
     		<div class="row d-flex no-gutters">
     			<div class="col-md-5 d-flex">
-    				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="background-image:url(../../../static/images/about-1.jpg);">
+    				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="background-image:url(../../../static/images/chick.jpeg);">
     				</div>
     			</div>
     			<div class="col-md-7 pl-md-5 py-md-5">
     				<div class="heading-section pt-md-5">
-	            <h2 class="mb-4">Why Choose Us?</h2>
+	            <h2 class="mb-4">Why use this app?</h2>
     				</div>
     				<div class="row">
 	    				<div class="col-md-6 services-2 w-100 d-flex">
 	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-stethoscope"></span></div>
 	    					<div class="text pl-3">
-	    						<h4>Care Advices</h4>
-	    						<p>Far far away, behind the word mountains, far from the countries.</p>
+								<h4>Programs</h4>
+								<p>It provides a structured guide on how to rear chicken in terms of programs,stages and events</p>
+	    						
 	    					</div>
 	    				</div>
 	    				<div class="col-md-6 services-2 w-100 d-flex">
 	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-customer-service"></span></div>
 	    					<div class="text pl-3">
-	    						<h4>Customer Supports</h4>
-	    						<p>Far far away, behind the word mountains, far from the countries.</p>
+	    						<h4>Notifications</h4>
+	    						<p>This feature enables you to be notified whenever there is a change in the program </p>
 	    					</div>
 	    				</div>
 	    				<div class="col-md-6 services-2 w-100 d-flex">
 	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-emergency-call"></span></div>
 	    					<div class="text pl-3">
-	    						<h4>Emergency Services</h4>
-	    						<p>Far far away, behind the word mountains, far from the countries.</p>
+	    						<h4>Marketing</h4>
+	    						<p>It provides a platform to market your product.</p>
 	    					</div>
 	    				</div>
 	    				<div class="col-md-6 services-2 w-100 d-flex">
@@ -333,68 +334,9 @@
 	                  </div>
                   </div>
                 </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url(../../../static/images/person_2.jpg)"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url(../../../static/images/person_3.jpg)"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url(../../../static/images/person_1.jpg)"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url(../../../static/images/person_2.jpg)"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+			  </div>
+
+			
           </div>
         </div>
       </div>

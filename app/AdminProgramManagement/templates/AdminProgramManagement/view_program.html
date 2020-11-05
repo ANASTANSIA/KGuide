@@ -1,57 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>View Programs</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="../../../static/css/animate.css">
+
+  <link rel="stylesheet" href="../../../static/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="../../../static/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="../../../static/css/magnific-popup.css">
+
+
+  <link rel="stylesheet" href="../../../static/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href=".../../../static/css/jquery.timepicker.css">
+
+  <link rel="stylesheet" href="../../../static/css/flaticon.css">
+  <link rel="stylesheet" href="../../../static/css/style.css">
 </head>
+
 <body>
-    
-    <p> <h1> Program Name:</h1></p>  
-    <p><h3> Program Description</h3></p>
-    <a class="btn btn-primary" href="{{ url_for('AdminProgramManagement.add_stage') }}" role="button">Add Stage</a>
-    <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Stage Name</th>
-            <th scope="col">Stage Duration</th>
-            <th scope="col">Events</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Stag1</td>
-            <td>1 - 20</td>
-            <td> <tr>
-                <td>
-                  First row of Inner Table
-                </td>
-              </tr>
+
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="{{ url_for('user_management.index') }}"><span
+          class="flaticon-pawprint-1 mr-2"></span>Chicken Rearing </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span> Menu
+      </button>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="{{ url_for('AdminProgramManagement.index') }}"
+              class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item"><a href="{{ url_for('AdminProgramManagement.fetch_programs')}}" class="nav-link">Manage
+              Chicken</a>
+          </li>
+          <li class="nav-item"><a href="{{ url_for('products.view_product')}}" class="nav-link">Products</a></li>
+
+          {% if current_user.is_anonymous %}
+          <li class="nav-item"> <a href="{{ url_for('authentication.login')}}" class="nav-link">Login</a></li>
+          {% else %}
+          <li class="nav-item"> <a href="{{ url_for('user.user', username=current_username) }}"
+              class="nav-link">Profile</a></li>
+          <li class="nav-item"> <a href="{{ url_for('authentication.logout')}}" class="nav-link">LogOut</a></li>
+          {% endif %}
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+
+  <br>
+  <br>
+  <br>
+
+
+
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-8 mx-auto">
+        <div class="card ">
+          <br>
+          <br>
+
+
+
+          <div class="card-header">
+            <h2>Program Name : {{ program.program_name }}</h2>
+            <h3>Program Description {{ program.program_description }}</h1>
+              <a class="btn btn-primary"
+                href="{{ url_for('AdminProgramManagement.add_stage', program_id = program_id ) }}"> Add Stage</a>
+
+          </div>
+
+
+          <table class="table table-bordered">
+            <thead>
               <tr>
-                <td>
-                  Second row of Inner Table
-                </td></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Stage 2</td>
-            <td>20 - 30</td>
-            <td>  <tr>
-                <td>
-                  First row of Inner Table
-                </td>
+                <th scope="col">#</th>
+                <th scope="col"> Stage Name</th>
+                <th scope="col">Stage Duration</th>
+                <th scope="col" >Events</th>
               </tr>
+            </thead>
+            <tbody>
+              {% set rowno = 1 %}
+              {% for stage,event in result.items() %}
               <tr>
-                <td>
-                  Second row of Inner Table
-                </td></td>
-          </tr>
-         
-        </tbody>
-      </table>
+                <th scope="row"> 1 </th>
+
+                <td>{{stage[0] }}</td>
+                <td>{{ stage[1] }} - {{ stage[2] }}</td>
+                {% for i in event%}
+                {% set rowno = rowno + 1 %}
+                <td rowspan="rowno">
+                  
+                <td>{{ i }}</td>
+                
+                </td>
+                {% endfor %}
+
+
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  </div>
+
+  <!-- Content here -->
+
+  </div>
+
+
 
 </body>
+
 </html>

@@ -63,9 +63,9 @@ def edit_profile():
 
 
 @user_blueprint.route('/delete_product')
-#@login_required
-def delete_product():
-    product= Product.query.filter_by()
-    db.session.delete(product)
+# @login_required
+def delete_product(product):
+    productResult= Product.query.filter_by(Product.product_id == product)
+    db.session.delete(productResult)
     db.session.commit()
     return redirect(url_for('user.user/<username>'))

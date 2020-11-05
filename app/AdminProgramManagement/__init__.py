@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-admin_program_management_blueprint = Blueprint('program', __name__)
+admin_program_management_blueprint = Blueprint('AdminProgramManagement', __name__,template_folder="templates")
 
 
-from app.auth import routes, forms
+from app.AdminProgramManagement import routes,reports

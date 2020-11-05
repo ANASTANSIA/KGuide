@@ -6,7 +6,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 # class that stores configuration variables
 class Config(object):
     # configuration settings defined as class variables
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'just-crack-it-you-stupid-fool'
     # secret key value is sometimes used as a cryptographic key  ,usefull yo generate tokenns or signatures
     # used by web forms to  protect web forms against cross site request forgery
 
@@ -21,6 +21,16 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['anastansiaserem55@gmail.com']
+    APP_ADMIN = 'anastansiaserem@gmail.com'
+    
+    #flask-User settings
+    USER_APP_NAME = "Chicken App"      # Shown in and email templates and page footers
+    USER_ENABLE_EMAIL = True        # Enable email authentication
+    USER_ENABLE_USERNAME = False    # Disable username authentication
+    USER_EMAIL_SENDER_NAME = USER_APP_NAME
+    USER_EMAIL_SENDER_EMAIL = "noreply@example.com"
+
+    
     UPLOAD_FOLDER ='app/static/uploads'
     ALLOWED_EXTENSIONS = set(['pdf','png','jpg','jpeg'])
   
@@ -30,3 +40,5 @@ class Config(object):
 
     BOOTSTRAP_SERVE_LOCAL = True
     EXPLAIN_TEMPLATE_LOADING  = True
+    ELASTICSEARCH_URL= os.environ.get('ELASTICSEARCH_URL')
+    # ELASTICSEARCH_URL=http://localhost:9200

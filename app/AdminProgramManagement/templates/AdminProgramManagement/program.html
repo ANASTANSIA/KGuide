@@ -1,31 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+    <head>
+    
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+     
+        <link rel="stylesheet" href="../../../static/css/animate.css">
+        
+        <link rel="stylesheet" href="../../../static/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="../../../static/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="../../../static/css/magnific-popup.css">
+    
+    
+        <link rel="stylesheet" href="../../../static/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" href=".../../../static/css/jquery.timepicker.css">
+    
+        <link rel="stylesheet" href="../../../static/css/flaticon.css">
+        <link rel="stylesheet" href="../../../static/css/style.css">
+      </head>
 <body>
-    <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col"> Program Name</th>
-            <th scope="col">Program Description</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td<a href="{{ url_for('AdminProgramManagement.view_program')}} "></a>>Feeding</td<a href="{{ url_for('AdminProgramManagement.view_program')}} "></a>>
-            <td>This program provides all the necessary activities that should happen to the chicken with regards to feeding</td>
-            
-          </tr>
-         
-        </tbody>
-      </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-center">
+                <p class="mb-0 phone pl-md-2">
+                    <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +254711264880</a> 
+                    <a href="#"><span class="fa fa-paper-plane mr-1"></span> chickenrearing@.com</a>
+                </p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-md-end">
+                <div class="social-media">
+                <p class="mb-0 d-flex">
+                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                    
+                </p>
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+<div class="container">
+    <a class="navbar-brand" href="{{ url_for('user_management.index') }}"><span class="flaticon-pawprint-1 mr-2"></span>Chicken Rearing </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="fa fa-bars"></span> Menu
+  </button>
+  <div class="collapse navbar-collapse" id="ftco-nav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active"><a href="{{ url_for('AdminProgramManagement.index') }}" class="nav-link">Dashboard</a>
+      </li>
+      <li class="nav-item"><a href="{{ url_for('AdminProgramManagement.fetch_programs')}}" class="nav-link">Manage Chicken</a>
+      </li>
+      <li class="nav-item"><a href="{{ url_for('products.view_product')}}" class="nav-link">Products</a></li>
+
+      {% if current_user.is_anonymous %}
+      <li class="nav-item"> <a href="{{ url_for('authentication.login')}}" class="nav-link">Login</a></li>
+      {% else %}
+      <li class="nav-item"> <a href="{{ url_for('user.user', username=current_username) }}"
+          class="nav-link">Profile</a></li>
+      <li class="nav-item"> <a href="{{ url_for('authentication.logout')}}" class="nav-link">LogOut</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+</nav>
+
+
+ 
+    
+
+    <div class="container">
+      <div class="row">
+
+        
+        <div class="col-8">
+          <div class="card">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col"> Program Name</th>
+                <th scope="col">Program Description</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for program in programs %}
+              <tr>
+                <th scope="row">{{ program.program_id }}</th>
+                <td>
+                 
+                  <a href="{{ url_for('AdminProgramManagement.view_program', program_id = program.program_id)}} "> {{ program.program_name }}</a>
+              
+                </td>
+                <td>{{ program.program_description }}</td> 
+                <td><a type="button" class="btn btn-secondary" href="{{ url_for('AdminProgramManagement.delete_program', program_id = program.program_id) }}" >Delete</a>
+                  
+                  <a href="{{ url_for('AdminProgramManagement.program_update', program_id = program.program_id)}}" type="button" class="btn btn-primary btn-lg"  >
+                    Edit
+                  </a>
+                </td>
+                 
+              </tr>
+              {% endfor %}
+             
+            </tbody>
+          </table>
+        </div>
+      </div>
+        <div class="col-4 text-right">
+          <br>
+          <br>
+          
+
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Add a Program 
+          </button>
+
+         </div>
+      </div>
+    
+        <!-- Content here -->
+    
+    </div>
+   
+  
+   
+      <!-- Button trigger modal -->
+
+  
+  <!-- Add Program Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add a Program</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           
+                <form action="{{ url_for('AdminProgramManagement.add_program') }}" method="POST">
+
+                <div class="form-group">
+                    <label for="program_name">Program Name</label>
+                    <input type="text" class="form-control" id="program_name" name="program_name">
+                  </div>
+
+                <div class="form-group">
+                <label for="program_description">Program Description</label>
+                    <input type="text" class="form-control" id="program_description" name="program_description">
+                  </div>
+
+                  <div class="modal-footer"></div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+
+                </form>
+          
+        </div>
+        
+          
+        
+      </div>
+    </div>
+  </div>
+
+
+
 </body>
 </html>
 
@@ -55,134 +210,3 @@
 
 
 
-
-
-<p action="" method="post" novalidate>
-    {{ form.hidden_tag()}}
-    <p>
-        {{ form.program_name.label }} <br>
-        {{ form.program_name(size=32) }}
-        <!--error message-->
-        {% for error in form.program_name.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.program_description.label }} <br>
-        {{ form.program_description(size=32) }}
-        {% for error in form.program_description.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-    
-    <p>{{ form.submit()}} </p>
-</form>
-
-{% endblock %}
-
-
-<div class="card-body collapse show" id="card1">
-    <h2 class="card-title"></h2>
-    <p class="card-text"></p>
-        <h2>{{program.programName}</h2>
-        <h4>${program.programDescription}</h4>
-        
-        
-        <button class="btn btn danger" >Delete</button>
-
-
-    <div class="card mb-grid">
-        <div class="table-responsive-md">
-            <table
-                class="table table-actions table-striped table-hover mb-0"
-                data-table>
-                <thead>
-                    <tr>
-                        <th scope="col"><label
-                            class="custom-control custom-checkbox m-0 p-0">
-                                <input type="checkbox"
-                                class="custom-control-input table-select-all">
-                                <span class="custom-control-indicator"></span>
-                        </label></th>
-                        <th scope="col">STAGE</th>
-                        <th scope="col">EVENT</th>
-                        <th scope="col">ACTION</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                
-                    <tr>
-                        <c:forEach var="stage" items="${show}">
-                
-                        <tr>
-                        
-                            <td>
-                            <p>${stage.startTime} - ${stage.endTime}</p>
-                            
-                            </td>
-                            
-                            
-
-                        
-                        </c:forEach>
-                        <td rowspan="rowspan">
-                        <c:forEach var="event" items="${eventList}">
-                            
-                            <p>${event.eventDescription}</p>
-                            
-                            
-                            
-                            </c:forEach>
-                                </td>
-                    
-                    <td><a href="EditStage.jsp"
-                            class="btn btn-sm btn-danger">EDIT</a>
-                            <a href="DeleteStage"
-                            class="btn btn-sm btn-danger">DELETE</a>
-                            
-                            </td>
-                            
-                    </tr>
-                            
-                    
-                
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="card">
-<div class="card-body">
-    <h5 class="card-title">
-        <a href="DisplayProgramServlet" class="btn btn-secondary">Available
-            programs</a>
-    </h5>
-    
-    <div class="card-body">
-    
-    <c:forEach var="program" items="${programList}">
-                    <p><a href="DisplayEvents?programId=${program.programId}">${program.programDescription}</a></p>
-
-                    </c:forEach>
-    
-    </div>
-
-
-</div>
-</div>
-</div>
-
-
-
-</div>
-</div>
-
-</div>
-</div>

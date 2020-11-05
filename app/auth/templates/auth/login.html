@@ -52,52 +52,60 @@
 	        <span class="fa fa-bars"></span> Menu
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	        	
-				{% if current_user.is_anonymous %}
-				<li class="nav-item"> <a href="{{ url_for('authentication.login')}}"class="nav-link">Login</a></li>
-				{% else %}
-				<li class="nav-item"> <a href="{{ url_for('user.user', username=current_username) }}"class="nav-link">Profile</a></li>
-				<li class="nav-item"> <a href="{{ url_for('auth.logout')}}"class="nav-link">LogOut</a></li>
-				{% endif %}
-	        </ul>
+	       
 	      </div>
 	    </div>
       </nav>
+      <br>
+      <br>
       
-<div class="container" style="position: center; ">
+<div class="container " >
 
-  <div class="card">
-    <div class="card-header text-center">
-       Log In
-    </div>
-    <div class="card-body">
-      {{ form.hidden_tag()}}
-    <p>
-        {{ form.username.label }} <br>
-        {{ form.username(size=32) }}
-        <!--error message-->
-        {% for error in form.username.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.password.label }} <br>
-        {{ form.password(size=32) }}
-        {% for error in form.password.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.remember_me()}}
-        {{ form.remember_me.label }}
-    </p>
-    <p>{{ form.submit()}} </p>
-</form>
-<p>New User? <a href="{{ url_for('authentication.register')}}">Click to Register!</a></p>
+  <div class=" row mx-auto">
+    <div class="col-8">
 
+   
+    <div class="card">
+      <div class="card-header text-center">
+       <h1>  Log In</h1> 
+      </div>
+      <div class="card-body">
+        
+        <form method="POST">  
+  
+        {{ form.hidden_tag()}}
+      <p>
+          {{ form.username.label }} <br>
+          {{ form.username(size=32) }}
+          <!--error message-->
+          {% for error in form.username.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </p>
+      <p>
+          {{ form.password.label }} <br>
+          {{ form.password(size=32) }}
+          {% for error in form.password.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </p>
+      <p>
+          {{ form.remember_me()}}
+          {{ form.remember_me.label }}
+      </p>
+      <p>{{ form.submit()}} </p>
+  </form>
+  <p>New User? <a href="{{ url_for('authentication.register')}}">Click to Register!</a></p>
+  <p>
+    Forgot Your Password?
+    <a href="{{ url_for('authentication.reset_password_request') }}">Click to Reset It</a>
+  </p>
+      </div>
     </div>
+
   </div>
+  </div>
+  
 
    
 </div>
