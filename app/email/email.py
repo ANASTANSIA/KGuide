@@ -1,9 +1,11 @@
 from flask_mail import Message
 from app import mail
 from app.models import User
-from flask.templating import render_template
+from flask import render_template,request,redirect,url_for
 from app import current_app
 from threading import Thread
+from flask.helpers import flash
+from flask_login.login_manager import current_user
 
 
 def send_async_email(app, msg):
@@ -26,3 +28,20 @@ def send_password_reset_email(user):
                text_body=render_template('email/reset_password.txt', user=user, token=token),
                html_body=render_template('email/reset_password.html',user=user, token=token)
                )
+    
+    
+def send_inquiry(user):
+    
+    recipient = current_app.config['DEFAULT_SENDER']
+    user = User.query.filter(current_user.id).first()
+    sender = user.email
+    if request.method == "POST":
+        body = request.form.get('message_body')    
+        msg = Message('Chicken App Inquirries',sender=sender, recipients=[recipient])
+        msg.body = (body)
+        msg.html=('<p> {{ body }} </p> ')
+        
+        mail.send(msg)
+        flash('Message Sent !!')
+    
+    return redirect(url_for('user_management.index'))

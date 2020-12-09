@@ -129,7 +129,7 @@ def search():
 @product_blueprint.route('/comment_product/<product_id>/<comment_id>',methods=['GET','POST'])
 @login_required  
    
-def comment_product(product_id,comment_id=0):
+def comment_product(product_id,comment_id):
     product = Product.query.get_or_404(product_id)
     comment_id = Comment.query.get_or_404(id)
     comments = Comment.query.order_by(Comment.timestamp.desc().all)
@@ -137,14 +137,21 @@ def comment_product(product_id,comment_id=0):
         req = request.form
         text = req.get('comment')
         
-        comment =Comment(text=comment,author=current_user.id,parent_id=Comment.id,product_id=Product.product_id)
-        comment.save()
+        if comment_id:
+            comment =Comment(text=comment,author=current_user.id,parent_id=comment_id,product_id=product_id)
+            # comment.save()
+            db.session.add(comment)
+            db.session.commit()
+        else:
+            comment = Comment(text = comment,author= current_user.id, parent_id= 0, Product=product_id)
+            db.session.add(comment)
+            db.session.commit()
         
     
             
     
     # result = Comment.query.order_by(Comment.path)
-    return render_template('Products/comment.html',comments=comments,product=product)
+    return render_template('Products/products.html',comments=comments,product=product)
 
 @product_blueprint.route('/comment/<product_id>/<comment_id>',methods=['GET','POST'])
 def comment(product_id,comment_id=0):

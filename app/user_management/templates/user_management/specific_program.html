@@ -32,11 +32,11 @@
       <div class="row">
         <div class="col-md-6 d-flex align-items-center">
           <p class="mb-0 phone pl-md-2">
-            <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +254711264880</a>
+            
             <a href="#"><span class="fa fa-paper-plane mr-1"></span> chickenrearing@.com</a>
           </p>
         </div>
-        <div class="col-md-6 d-flex justify-content-md-end">
+        <!-- <div class="col-md-6 d-flex justify-content-md-end">
           <div class="social-media">
             <p class="mb-0 d-flex">
               <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i
@@ -46,7 +46,7 @@
 
             </p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -97,6 +97,10 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#subscribe">
               Subscribe
             </button>
+            <a type="button" class="btn btn-primary" href="{{ url_for('user_management.get_user_programs',user = current_user.id) }}">
+              Your Subscriptions
+            </a>
+
 
           <h3>Program Name : {{ program.program_name }}</h3>
           <h3>Program Description {{ program.program_description }}</h3>
@@ -164,11 +168,11 @@
         </div>
 
         <div class="modal-body">
-          <form action="{{  url_for('user_management.subscribe',program_id=program.program_id) }}" method="post">
+          <form action="{{  url_for('user_management.subscribe',program_id=program.program_id ) }}" method="POST">
             
             <div class="form-group">
               <label for="age">Age in days</label>
-              <input type="number" class="form-control" id="age" aria-describedby="emailHelp"
+              <input type="number" class="form-control" id="age" name="age" 
                 placeholder="Enter your chickens' age">
               <small id="agehelp" class="form-text text-muted">In days.</small>
             </div>

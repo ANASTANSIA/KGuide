@@ -12,6 +12,7 @@ from app.search import add_to_index,remove_from_index,query_index
 from sqlalchemy.sql.schema import Column, ForeignKey, Table
 from lib2to3.pytree import Base
 from sqlalchemy.types import Integer
+from flask import json
 
 #import jwt
 class Permission:      
@@ -81,10 +82,10 @@ def load_user(id):
         return User.query.get(int(id))
     
 subscription = db.Table('subscription',
-                        db.Column('subscription_id',db.Integer,primary_key=True),
+                        # db.Column('subscription_id',db.Integer,primary_key=True),
                         db.Column('program', db.Integer, ForeignKey('program.program_id')),
                         db.Column('user', db.Integer, ForeignKey('user.id')),
-                        db.Column('age',db.Integer),
+                        db.Column('age',db.Integer)
                     )
 
 class User(UserMixin,db.Model):
@@ -100,18 +101,15 @@ class User(UserMixin,db.Model):
         
         product = db.relationship('Product', backref='user', lazy='dynamic',cascade='all,delete,delete-orphan')
         
-        subscriptions = db.relationship('Program',secondary=subscription,backref=db.backref('subscribers',lazy='dynamic'))
-       
-      
+        subscriptions = db.relationship("Program",secondary=subscription, backref="subscribers")
+        
+        notifications = db.relationship('Notification', backref='user',
+                                    lazy='dynamic',cascade='all,delete,delete-orphan') 
         
         
 
-        def __repr__(self, username,email,password_hash,about_me,last_seen):
-            self.username=username
-            self.email = email
-            self.password_hash = password_hash
-            self.about_me = about_me
-            self.last_seen = last_seen
+        def __repr__(self):
+          
             
             return '<User {}>'.format(self.username)
        
@@ -225,6 +223,23 @@ class Role(db.Model):
             db.session.add(role)
         db.session.commit()
         
+        
+class Subscriptions(db.Model):
+    user = db.Column(db.Integer,db.ForeignKey('user.id'),primary_key=True,nullable=False)
+    program =db.Column(db.Integer, db.ForeignKey('program.program_id'),primary_key=True, nullable=False)
+    age = db.Column(db.Integer,nullable=False,index=True)
+    subscription_day= db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    
+    
+    # def increment_age(self,age):       
+    #     age += 1
+    #     Subscriptions.age = age
+        
+    #     db.session.commit()
+        
+    
+    
+            
 
 class Product(SearchableMixin,db.Model):
     __searchable__ = ['product_type']
@@ -322,5 +337,14 @@ class Comment(db.Model):
         
     def level(self):
         return len(self.path)
+
+class Notification(db.Model):
+    id = db.Column(db.Integer, primary_key=True) 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    name = db.Column(db.String(128), index=True)
+    payload_json = db.Column(db.Text)
     
+    
+    def get_data(self):
+        return json.loads(str(self.payload_json))   
 
